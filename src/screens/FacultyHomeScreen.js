@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import HeaderNavigationBar from "../components/HeaderNavigationBar";
 import SearchBar from "../components/SearchBar";
-
 const FacultyHomeScreen = ({ navigation }) => {
 	const [Search, setSearch] = useState("");
 	return (
@@ -15,7 +14,13 @@ const FacultyHomeScreen = ({ navigation }) => {
 					style={{ alignSelf: "stretch" }}
 				/>
 			</View>
-			<TouchableOpacity style={styles.create}>
+			<TouchableOpacity
+				style={styles.create}
+				onPress={() => {
+					navigation.navigate("CreateQuiz");
+					console.log("Pressed");
+				}}
+			>
 				<Text style={styles.text}> Create </Text>
 				<Text style={styles.text}>New Quiz</Text>
 			</TouchableOpacity>
@@ -30,7 +35,8 @@ const FacultyHomeScreen = ({ navigation }) => {
 FacultyHomeScreen.navigationOptions = ({ navigation }) => {
 	return {
 		title: "Home",
-		headerLeft: <HeaderNavigationBar navigation={navigation} />
+		headerLeft: () => <HeaderNavigationBar navigation={navigation} />,
+		headerShown: false
 	};
 };
 const styles = StyleSheet.create({
